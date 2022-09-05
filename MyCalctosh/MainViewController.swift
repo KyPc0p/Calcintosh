@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Calculator"
-        label.font = UIFont(name: "sysfont", size: 65)
+        label.font = UIFont(name: "sysfont", size: 60)
         label.textColor = .white
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.7
@@ -44,10 +44,32 @@ class MainViewController: UIViewController {
     
     private let numberLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "sysfont", size: 40)
+        label.font = UIFont(name: "sysfont", size: 45)
         label.textColor = .black
         label.textAlignment = .right
-        label.text = "12345"
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
+        label.text = "1234567890"
+        return label
+    }()
+    
+    private let key: UIView = {
+        let view = UIView()
+        
+        view.backgroundColor = .white
+        view.layer.borderColor = UIColor.black.cgColor
+        view.layer.borderWidth = 4
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 10 , height: 10)
+        view.layer.shadowOpacity = 1
+        view.layer.shadowRadius = 0
+        return view
+    }()
+    
+    private let num: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "sysfont", size: 45)
+        label.text = "C"
         return label
     }()
     
@@ -56,41 +78,17 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setConstraints()
-//        drawRect()
     }
     
     func setupViews(){
-        view.backgroundColor = #colorLiteral(red: 0.03589498624, green: 0.0935928002, blue: 0.08751047403, alpha: 1)
+        view.backgroundColor = .black
         view.addSubview(patternView)
         view.addSubview(titleLabel)
         view.addSubview(titleRect)
         view.addSubview(numberView)
         view.addSubview(numberLabel)
-    }
-    
-//    func drawRect() {
-//        let render = UIGraphicsImageRenderer(size: CGSize(width: 45, height: 45))
-//
-//        let image = render.image { ctx in
-//            let rectangle = CGRect(x: 0, y: 0, width: 45, height: 45)
-//            ctx.cgContext.setFillColor(UIColor.black.cgColor)
-//            ctx.cgContext.setStrokeColor(UIColor.white.cgColor)
-//            ctx.cgContext.setLineWidth(6)
-//
-//            ctx.cgContext.addRect(rectangle)
-//            ctx.cgContext.drawPath(using: .fillStroke)
-//        }
-//
-//        titleRect.image = image
-//    }
-    
-    func buttonAdjustments(button: UIView){
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 10 , height: 10)
-        button.layer.shadowOpacity = 1
-        button.layer.shadowRadius = 0
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 4
+        view.addSubview(key)
+        view.addSubview(num)
     }
 }
 
@@ -109,7 +107,6 @@ extension MainViewController {
         NSLayoutConstraint.activate([
             titleRect.heightAnchor.constraint(equalTo: titleRect.widthAnchor),
             titleRect.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-//            titleRect.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             titleRect.leadingAnchor.constraint(equalTo: numberView.leadingAnchor, constant: 3),
             titleRect.bottomAnchor.constraint(equalTo: patternView.topAnchor, constant: -15)
         ])
@@ -118,26 +115,39 @@ extension MainViewController {
         NSLayoutConstraint.activate([
             patternView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
             patternView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            patternView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            patternView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8)
+            patternView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            patternView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
         numberView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             numberView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             numberView.topAnchor.constraint(equalTo: patternView.topAnchor, constant: 25),
-            numberView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 30),
-            numberView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -35),
-            numberView.bottomAnchor.constraint(equalTo: patternView.topAnchor, constant: 100)
+            numberView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 35),
+            numberView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -40),
+            numberView.bottomAnchor.constraint(equalTo: patternView.topAnchor, constant: 120)
         ])
         
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            numberLabel.centerYAnchor.constraint(equalTo: numberView.centerYAnchor, constant: 2),
-//            numberLabel.topAnchor.constraint(equalTo: numberView.topAnchor, constant: 10),
+            numberLabel.topAnchor.constraint(equalTo: numberView.topAnchor, constant: 20),
             numberLabel.leadingAnchor.constraint(equalTo: numberView.leadingAnchor, constant: 15),
             numberLabel.trailingAnchor.constraint(equalTo: numberView.trailingAnchor, constant: -15),
-//            numberLabel.bottomAnchor.constraint(equalTo: numberView.bottomAnchor, constant: 10)
+            numberLabel.bottomAnchor.constraint(equalTo: numberView.bottomAnchor, constant: -20)
+        ])
+        //...
+        key.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            key.topAnchor.constraint(equalTo: numberView.bottomAnchor, constant: 20),
+            key.leadingAnchor.constraint(equalTo: titleRect.leadingAnchor),
+            key.trailingAnchor.constraint(equalTo: numberView.trailingAnchor,constant: -260),
+            key.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -560)
+        ])
+        
+        num.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            num.centerXAnchor.constraint(equalTo: key.centerXAnchor),
+            num.centerYAnchor.constraint(equalTo: key.centerYAnchor)
         ])
     }
 }
