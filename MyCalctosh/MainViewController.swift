@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
         createTitle(text: "3", size: 45, color: .black)
     }()
     
-    let numPadView = NumPadView()
+    private let numPadView = NumPadView()
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -40,15 +40,14 @@ class MainViewController: UIViewController {
     
     //MARK: - Methods
     func setupViews(){
+//        numPadView.backgroundColor = .darkGray  //цвет
+        
         view.backgroundColor = .black
         view.addSubview(titleLabel)
         view.addSubview(titleRect)
         view.addSubview(patternView)
         patternView.addSubview(numberView)
         numberView.addSubview(numberLabel)
-        
-        numPadView.backgroundColor = .darkGray
-        
         patternView.addSubview(numPadView)
     }
     
@@ -58,7 +57,6 @@ class MainViewController: UIViewController {
         view.layer.borderColor = borderColor
         view.layer.borderWidth = 3
         view.layer.cornerRadius = cRadius
-        
         return view
     }
     
@@ -69,7 +67,7 @@ class MainViewController: UIViewController {
         label.textColor = color
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.7
-     
+        label.textAlignment = .right
         return label
     }
 }
@@ -120,7 +118,7 @@ extension MainViewController {
         numPadView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             numPadView.topAnchor.constraint(equalTo: numberView.bottomAnchor, constant: 20),
-            numPadView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 45),
+            numPadView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 40),
             numPadView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -45),
             numPadView.bottomAnchor.constraint(equalTo: patternView.bottomAnchor, constant: -50)
         ])

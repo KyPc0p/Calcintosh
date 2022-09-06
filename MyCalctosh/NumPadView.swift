@@ -7,12 +7,49 @@
 
 import UIKit
 
-class NumPadView: UIView {
+class NumButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUpView()
+        setButton()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setButton() {
+        setTitleColor(.black, for: .normal)
+        titleLabel?.font =  UIFont(name: "sysfont", size: 45)
+        backgroundColor = .white
+        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 3
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 10 , height: 10)
+        layer.shadowOpacity = 1
+        layer.shadowRadius = 0
+    }
+}
+
+class NumPadView: UIView {
+    private lazy var numButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font =  UIFont(name: "sysfont", size: 25)
+        button.backgroundColor = .white
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 3
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 10 , height: 10)
+        button.layer.shadowOpacity = 1
+        button.layer.shadowRadius = 0
+        return button
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         addButtonsToStackView()
+        setUpView()
         setUpConstraints()
     }
     
@@ -25,7 +62,8 @@ class NumPadView: UIView {
          let stackView = UIStackView()
          stackView.axis = .vertical
          stackView.distribution = .fillEqually
-         stackView.spacing = 5
+         stackView.spacing = 10
+//         stackView.backgroundColor = .yellow
          return stackView
      }()
      
@@ -33,32 +71,20 @@ class NumPadView: UIView {
          let stackView = UIStackView()
          stackView.axis = .horizontal
          stackView.distribution = .fillEqually
-         stackView.spacing = 5
+         stackView.spacing = 15
+//         stackView.backgroundColor = .cyan    //цвет
          return stackView
      }()
     
     //MARK: - Methods
-    private let numButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font =  UIFont(name: "sysfont", size: 25)
-        button.backgroundColor = .white
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 5
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 10 , height: 10)
-        button.layer.shadowOpacity = 1
-        button.layer.shadowRadius = 0
-        return button
-    }()
-
     func setUpView(){
         addSubview(HStack)
+        HStack.addSubview(VStack)
     }
     
     func addButtonsToStackView() {
         for i in 1...3 {
-            let button = numButton
+            let button = NumButton()
             button.setTitle("\(i)", for: .normal)
             HStack.addArrangedSubview(button)
         }
@@ -66,54 +92,20 @@ class NumPadView: UIView {
 
     func setUpConstraints() {
         HStack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            HStack.topAnchor.constraint(equalTo: topAnchor),
+            HStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            HStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            HStack.bottomAnchor.constraint(equalTo: topAnchor, constant: 75)
+        ])
+        
+        VStack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            VStack.topAnchor.constraint(equalTo: topAnchor),
+            VStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            VStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            VStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
     }
-    
-    //    private func createNumPad() {
-    //        let buttonWidth = view.frame.size.width / 5.148
-    //        let buttonHeight = view.frame.size.height / 11.8
-    //
-    //        let ZeroButton = UIButton(frame: CGRect(x: 0, y: 500, width: buttonWidth*2, height: buttonHeight))
-    //        ZeroButton.setTitle("0", for: .normal)
-    //
-    //        let EqualButton = UIButton(frame:CGRect(x: buttonWidth * 3.43, y: buttonHeight * 5, width: buttonWidth, height: buttonHeight*2))
-    //        EqualButton.setTitle("=", for: .normal)
-    //
-    //        for x in 0..<3 {
-    //            let simpleButton = UIButton(frame: CGRect(
-    //                x: 200,
-    //                y: 200,
-    //                width: buttonWidth,
-    //                height: buttonHeight
-    //            ))
-    //            simpleButton.setTitle("\(x + 1)", for: .normal)
-    //
-    //            simpleButton.setTitleColor(.black, for: .normal)
-    //            simpleButton.titleLabel?.font =  UIFont(name: "sysfont", size: 25)
-    //            simpleButton.backgroundColor = .white
-    //            simpleButton.layer.borderColor = UIColor.black.cgColor
-    //            simpleButton.layer.borderWidth = 5
-    //            simpleButton.layer.shadowColor = UIColor.black.cgColor
-    //            simpleButton.layer.shadowOffset = CGSize(width: 10 , height: 10)
-    //            simpleButton.layer.shadowOpacity = 1
-    //            simpleButton.layer.shadowRadius = 0
-    //
-    //            patternView.addSubview(simpleButton)
-    //        }
-    //
-    //
-    //        for button in [ZeroButton, EqualButton] {
-    //            button.setTitleColor(.black, for: .normal)
-    //            button.titleLabel?.font =  UIFont(name: "sysfont", size: 25)
-    //            button.backgroundColor = .white
-    //            button.layer.borderColor = UIColor.black.cgColor
-    //            button.layer.borderWidth = 5
-    //            button.layer.shadowColor = UIColor.black.cgColor
-    //            button.layer.shadowOffset = CGSize(width: 10 , height: 10)
-    //            button.layer.shadowOpacity = 1
-    //            button.layer.shadowRadius = 0
-    //            patternView.addSubview(button)
-    //        }
-    //    }
-//    }
 }
 
