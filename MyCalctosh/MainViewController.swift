@@ -49,7 +49,7 @@ class MainViewController: UIViewController {
         label.textAlignment = .right
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
-        label.text = "1234567890"
+        label.text = "3"
         return label
     }()
     
@@ -85,8 +85,12 @@ class MainViewController: UIViewController {
         view.addSubview(patternView)
         view.addSubview(titleLabel)
         view.addSubview(titleRect)
-        view.addSubview(numberView)
-        view.addSubview(numberLabel)
+        patternView.addSubview(numberView)
+        numberView.addSubview(numberLabel)
+    }
+
+    private func createNumButton(){
+    let button = UIStackView()
     }
 }
 
@@ -127,13 +131,14 @@ extension MainViewController {
         
         numberLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            numberLabel.topAnchor.constraint(equalTo: numberView.topAnchor, constant: 20),
+            numberLabel.topAnchor.constraint(equalTo: numberView.topAnchor, constant: 25),
             numberLabel.leadingAnchor.constraint(equalTo: numberView.leadingAnchor, constant: 15),
             numberLabel.trailingAnchor.constraint(equalTo: numberView.trailingAnchor, constant: -15),
             numberLabel.bottomAnchor.constraint(equalTo: numberView.bottomAnchor, constant: -20)
         ])
         
     }
+    
 }
 
 
