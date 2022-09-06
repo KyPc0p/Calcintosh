@@ -87,8 +87,6 @@ class MainViewController: UIViewController {
         view.addSubview(titleRect)
         view.addSubview(numberView)
         view.addSubview(numberLabel)
-        view.addSubview(key)
-        view.addSubview(num)
     }
 }
 
@@ -121,7 +119,6 @@ extension MainViewController {
         
         numberView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            numberView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             numberView.topAnchor.constraint(equalTo: patternView.topAnchor, constant: 25),
             numberView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 35),
             numberView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -40),
@@ -135,20 +132,7 @@ extension MainViewController {
             numberLabel.trailingAnchor.constraint(equalTo: numberView.trailingAnchor, constant: -15),
             numberLabel.bottomAnchor.constraint(equalTo: numberView.bottomAnchor, constant: -20)
         ])
-        //...
-        key.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            key.topAnchor.constraint(equalTo: numberView.bottomAnchor, constant: 20),
-            key.leadingAnchor.constraint(equalTo: titleRect.leadingAnchor),
-            key.trailingAnchor.constraint(equalTo: numberView.trailingAnchor,constant: -260),
-            key.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -560)
-        ])
         
-        num.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            num.centerXAnchor.constraint(equalTo: key.centerXAnchor),
-            num.centerYAnchor.constraint(equalTo: key.centerYAnchor)
-        ])
     }
 }
 
