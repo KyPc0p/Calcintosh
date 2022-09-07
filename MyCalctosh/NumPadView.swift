@@ -25,7 +25,7 @@ class NumButton: UIButton {
         layer.borderColor = UIColor.black.cgColor
         layer.borderWidth = 3
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 10 , height: 10)
+        layer.shadowOffset = CGSize(width: 7 , height: 7)
         layer.shadowOpacity = 1
         layer.shadowRadius = 0
     }
@@ -33,6 +33,7 @@ class NumButton: UIButton {
 
 class NumPadView: UIView {
     private lazy var numButton: UIButton = {
+        
         let button = UIButton()
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font =  UIFont(name: "sysfont", size: 25)
@@ -48,7 +49,9 @@ class NumPadView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addButtonsToStackView()
+        createUpperInternalBlock()
+        createLowerInternalBlock()
+        createRightBlockVStack()
         setUpView()
         setUpConstraints()
     }
@@ -58,54 +61,91 @@ class NumPadView: UIView {
     }
     
     //MARK: - StackViews
-     var VStack: UIStackView = {
-         let stackView = UIStackView()
-         stackView.axis = .vertical
-         stackView.distribution = .fillEqually
-         stackView.spacing = 10
-//         stackView.backgroundColor = .yellow
-         return stackView
-     }()
-     
-     var HStack: UIStackView = {
-         let stackView = UIStackView()
-         stackView.axis = .horizontal
-         stackView.distribution = .fillEqually
-         stackView.spacing = 15
-//         stackView.backgroundColor = .cyan    //цвет
-         return stackView
-     }()
+    lazy var mainHStack = createStack(axis: .horizontal, spacing: 20, distribution: .fillEqually)
+    lazy var upperInternalBlockVStack = createStack(axis: .vertical, spacing: 10, distribution: .fillEqually)
     
     //MARK: - Methods
-    func setUpView(){
-        addSubview(HStack)
-        HStack.addSubview(VStack)
+    func createUpperInternalBlock() {
+        let numberOfRows = 4
+        let buttonsPerRow = [3,3,3,3]
+        
+        var counter = 1
+        for i in 0..<numberOfRows {
+            let HStack = createStack(axis: .horizontal, spacing: 15, distribution: .fillEqually)
+            HStack.translatesAutoresizingMaskIntoConstraints = false
+            HStack.backgroundColor = UIColor.yellow
+            for _ in 0..<buttonsPerRow[i] {
+                let button = NumButton()
+                button.setTitle("\(counter)", for: .normal)
+                HStack.addArrangedSubview(button)
+                counter += 1
+            }
+            upperInternalBlockVStack.addArrangedSubview(HStack)
+        }
     }
     
-    func addButtonsToStackView() {
-        for i in 1...3 {
-            let button = NumButton()
-            button.setTitle("\(i)", for: .normal)
-            HStack.addArrangedSubview(button)
+    func createLowerInternalBlock(){
+        let numberOfRows = 1
+        let buttonsPerRow = [2]
+        var counter = 13
+
+        for i in 0..<numberOfRows {
+            let lowHStack = createStack(axis: .horizontal, spacing: 10, distribution: .fillEqually)
+            lowHStack.backgroundColor = UIColor.red
+            lowHStack.translatesAutoresizingMaskIntoConstraints = false
+            for _ in 0..<buttonsPerRow[i] {
+                let button = NumButton()
+                button.setTitle("\(counter)", for: .normal)
+                lowHStack.addArrangedSubview(button)
+                counter += 1
+            }
+            upperInternalBlockVStack.addArrangedSubview(lowHStack)
         }
+    }
+    
+    func createRightBlockVStack(){
+        let numberOfRows = 1
+        let buttonsPerRow = [4]
+        var counter = 15
+
+        for i in 0..<numberOfRows {
+            let rightVStack = createStack(axis: .vertical, spacing: 10, distribution: .fillEqually)
+            rightVStack.backgroundColor = UIColor.orange
+            rightVStack.translatesAutoresizingMaskIntoConstraints = false
+            for _ in 0..<buttonsPerRow[i] {
+                let button = NumButton()
+                button.setTitle("\(counter)", for: .normal)
+                rightVStack.addArrangedSubview(button)
+                counter += 1
+            }
+            mainHStack.addArrangedSubview(rightVStack)
+        }
+    }
+    
+    func createStack(axis: NSLayoutConstraint.Axis, spacing: CGFloat, distribution:UIStackView.Distribution  ) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = axis
+        stackView.distribution = distribution
+        stackView.spacing = spacing
+        return stackView
+    }
+    
+    func setUpView(){
+        addSubview(mainHStack)
+        mainHStack.addArrangedSubview(upperInternalBlockVStack)
+        
     }
 
     func setUpConstraints() {
-        HStack.translatesAutoresizingMaskIntoConstraints = false
+        mainHStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            HStack.topAnchor.constraint(equalTo: topAnchor),
-            HStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            HStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            HStack.bottomAnchor.constraint(equalTo: topAnchor, constant: 75)
+            mainHStack.topAnchor.constraint(equalTo: topAnchor),
+            mainHStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mainHStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+            mainHStack.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
-        VStack.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            VStack.topAnchor.constraint(equalTo: topAnchor),
-            VStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-            VStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            VStack.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        upperInternalBlockVStack.translatesAutoresizingMaskIntoConstraints = false
+        
     }
 }
-
