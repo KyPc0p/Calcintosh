@@ -40,8 +40,6 @@ class MainViewController: UIViewController {
     
     //MARK: - Methods
     func setupViews(){
-//        numPadView.backgroundColor = .darkGray  //цвет
-        
         view.backgroundColor = .black
         view.addSubview(titleLabel)
         view.addSubview(titleRect)
@@ -79,16 +77,17 @@ extension MainViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            titleLabel.leadingAnchor.constraint(equalTo: titleRect.trailingAnchor, constant: 30),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -45)
+            titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: titleRect.trailingAnchor, constant: 25),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -45),
+            titleLabel.heightAnchor.constraint(equalToConstant: 70)
         ])
         
         titleRect.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleRect.heightAnchor.constraint(equalTo: titleRect.widthAnchor),
-            titleRect.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleRect.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor, constant: -3),
+            titleRect.heightAnchor.constraint(equalTo: titleLabel.heightAnchor, multiplier: 0.6),
+            titleRect.widthAnchor.constraint(equalTo: titleRect.heightAnchor),
             titleRect.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            titleRect.bottomAnchor.constraint(equalTo: patternView.topAnchor, constant: -15)
         ])
         
         patternView.translatesAutoresizingMaskIntoConstraints = false

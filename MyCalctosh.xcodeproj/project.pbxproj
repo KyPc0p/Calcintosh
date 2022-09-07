@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7968538628C73CDD00F2CCF4 /* NumPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7968538528C73CDD00F2CCF4 /* NumPadView.swift */; };
+		79B2685028C88E87001AD145 /* NumPadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B2684F28C88E87001AD145 /* NumPadButton.swift */; };
 		79C617A528C5AD03005C669B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C617A428C5AD03005C669B /* AppDelegate.swift */; };
 		79C617A728C5AD03005C669B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C617A628C5AD03005C669B /* SceneDelegate.swift */; };
 		79C617A928C5AD03005C669B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C617A828C5AD03005C669B /* MainViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		7968538528C73CDD00F2CCF4 /* NumPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadView.swift; sourceTree = "<group>"; };
+		79B2684F28C88E87001AD145 /* NumPadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadButton.swift; sourceTree = "<group>"; };
 		79C617A128C5AD03005C669B /* MyCalctosh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCalctosh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C617A428C5AD03005C669B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79C617A628C5AD03005C669B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				79C617A628C5AD03005C669B /* SceneDelegate.swift */,
 				79C617A828C5AD03005C669B /* MainViewController.swift */,
 				7968538528C73CDD00F2CCF4 /* NumPadView.swift */,
+				79B2684F28C88E87001AD145 /* NumPadButton.swift */,
 				79C617AD28C5AD06005C669B /* Assets.xcassets */,
 				79C617AF28C5AD06005C669B /* LaunchScreen.storyboard */,
 				79C617C128C5D5A5005C669B /* Fonts */,
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79B2685028C88E87001AD145 /* NumPadButton.swift in Sources */,
 				7968538628C73CDD00F2CCF4 /* NumPadView.swift in Sources */,
 				79C617A928C5AD03005C669B /* MainViewController.swift in Sources */,
 				79C617A528C5AD03005C669B /* AppDelegate.swift in Sources */,
