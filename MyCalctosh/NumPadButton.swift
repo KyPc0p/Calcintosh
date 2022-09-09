@@ -19,11 +19,12 @@ class NumPadButton: UIButton {
     }
     
     func setButton() {
-        setTitle("0", for: .normal)
         titleLabel?.adjustsFontSizeToFitWidth = true
         titleLabel?.minimumScaleFactor = 0.2
+        titleLabel?.font =  UIFont(name: "sysfont", size: 35)
+        titleLabel?.textAlignment = .center
+        
         setTitleColor(.black, for: .normal)
-        titleLabel?.font =  UIFont(name: "sysfont", size: 45)
         backgroundColor = .white
         layer.borderColor = UIColor.black.cgColor
         layer.borderWidth = 3
@@ -32,9 +33,5 @@ class NumPadButton: UIButton {
         layer.shadowOpacity = 1
         layer.shadowRadius = 0
         
-    }
-    
-    @objc func methods() {
-        print(tag)
     }
 }
