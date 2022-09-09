@@ -9,33 +9,25 @@ import UIKit
 
 class NumPadView: UIView {
     
-    let clearButton = NumPadButton()
-    let equalButton = NumPadButton()
-    let zeroButton = NumPadButton()
-    let dotButton = NumPadButton()
+    private let operation = ["=","/","*","-","+"]
     
-    lazy var digitsStack: UIStackView = {
-        createStack(axis: .vertical, spacing: 30, distrib: .fillEqually) //высота оступа
-    }()
+    private let clearButton = NumPadButton()
+    private let equalButton = NumPadButton()
+    private let zeroButton = NumPadButton()
+    private let dotButton = NumPadButton()
     
-    lazy var upperLineStack: UIStackView = {
-        createStack(axis: .horizontal, spacing: 15, distrib: .fillEqually)
-    }()
-    
-    lazy var rightStack: UIStackView = {
-        createStack(axis: .vertical, spacing: 30, distrib: .fillEqually)
-    }()
-    
-    //костыль
-    lazy var digitsBottomStack: UIStackView = {
-        createStack(axis: .horizontal, spacing: 15, distrib: .fillEqually)
-    }()
+    private lazy var digitsStack = createStack(axis: .vertical, spacing: 30)
+    private lazy var upperLineStack = createStack(axis: .horizontal, spacing: 15)
+    private lazy var rightStack = createStack(axis: .vertical, spacing: 30)
+    private lazy var digitsUpperStack = createStack(axis: .horizontal, spacing: 15)
+    private lazy var digitsBottomStack = createStack(axis: .horizontal, spacing: 15)
+    private lazy var digitsCenterStack = createStack(axis: .horizontal, spacing: 15)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
         setUpConstraints()
-
+        
         //Проверка
         clearButton.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
         clearButton.setTitle("C", for: .normal)
@@ -51,32 +43,55 @@ class NumPadView: UIView {
         dotButton.setTitle(".", for: .normal)
     }
     
-    //Проверка
-    let operation = ["=","/","*","-","+"]
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - Methods
-    func setUpView(){
-        addSubview(clearButton)
-        addSubview(upperLineStack)
-        addSubview(dotButton)
-        addSubview(zeroButton)
-        addSubview(rightStack)
-        addSubview(digitsStack)
-        addSubview(equalButton)
-        
+    private func setUpView(){
+        setupSubViews(clearButton, upperLineStack, dotButton, zeroButton, rightStack, digitsStack, equalButton)
+        upperLineStack.backgroundColor = .brown
+        digitsStack.backgroundColor = .orange
+        addDigitsBlock()
         addButtons(toStack: upperLineStack, buttonsCount: 3, increaseTegBy: 0)
         addButtons(toStack: rightStack, buttonsCount: 2, increaseTegBy: 3)
-        addDigitsBlock()
-        
-        digitsStack.addArrangedSubview(digitsBottomStack)
-        addLowerDigitsBlockLine()
     }
     
-    func addButtons(toStack stack: UIStackView, buttonsCount: Int, increaseTegBy num: Int) {
+    private func addDigitsBlock() {
+        var counter = 1
+        
+        for stack in [digitsUpperStack, digitsCenterStack, digitsBottomStack] {
+            
+            for _ in 0..<3 {
+                let button = NumPadButton()
+                
+                if counter >= 7 {
+                    button.setTitle("\(counter - 6)", for: .normal)
+                } else if counter >= 4 {
+                    button.setTitle("\(counter)", for: .normal)
+                } else {
+                    button.setTitle("\(counter + 6)", for: .normal)
+                }
+                
+                button.tag = counter
+                button.addTarget(self, action: #selector(mocFunc(_:)), for: .touchUpInside)
+                stack.addArrangedSubview(button)
+                counter += 1
+            }
+            digitsStack.addArrangedSubview(stack)
+        }
+    }
+    
+    private func createStack(axis: NSLayoutConstraint.Axis, spacing: CGFloat) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = axis
+        stackView.distribution = .fillEqually
+        stackView.spacing = spacing
+        return stackView
+    }
+    
+    private func addButtons(toStack stack: UIStackView, buttonsCount: Int, increaseTegBy num: Int) {
         let buttonsPerRow = buttonsCount
         
         for i in 0..<buttonsPerRow {
@@ -88,60 +103,18 @@ class NumPadView: UIView {
         }
     }
     
-    func addLowerDigitsBlockLine(){
-        let buttonsPerRow = 3
-        var counter = 7
-        
-        for i in 0..<buttonsPerRow {
-            let button = NumPadButton()
-            button.setTitle("\(i + 1)", for: .normal)
-            button.tag = counter
-            button.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
-            counter += 1
-            digitsBottomStack.addArrangedSubview(button)
+    private func setupSubViews(_ subviews: UIView...) {
+        subviews.forEach { subview in
+            addSubview(subview)
         }
     }
     
-    func addDigitsBlock() {
-        let numberOfRows = 2
-        let buttonsPerRow = 3
-        var counter = 0
-        
-        for _ in 0..<numberOfRows {
-            
-            let HStack = createStack(axis: .horizontal, spacing: 15, distrib: .fillEqually) //ширина оступа
-            
-            for _ in 0..<buttonsPerRow {
-                let button = NumPadButton()
-                button.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
-                button.tag = counter + 1
-                
-                if counter >= 3 {
-                    button.setTitle("\(counter + 1)", for: .normal)
-                } else {
-                    button.setTitle("\(counter + 7)", for: .normal)
-                }
-                HStack.addArrangedSubview(button)
-                counter += 1
-            }
-            digitsStack.addArrangedSubview(HStack)
-        }
-    }
-    
-    func createStack(axis: NSLayoutConstraint.Axis, spacing: CGFloat, distrib:UIStackView.Distribution) -> UIStackView {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = axis
-        stackView.distribution = distrib
-        stackView.spacing = spacing
-        return stackView
-    }
+    //MARK: - Action
     
     @objc func mocFunc(_ sender: UIButton) {
         print(sender.tag)
     }
     
-    //MARK: - Action
     func zeroPressed() {
         
     }
@@ -208,7 +181,6 @@ extension NumPadView {
             zeroButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             zeroButton.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
-        
     }
 }
 
