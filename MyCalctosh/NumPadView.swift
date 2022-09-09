@@ -50,8 +50,6 @@ class NumPadView: UIView {
     //MARK: - Methods
     private func setUpView(){
         setupSubViews(clearButton, upperLineStack, dotButton, zeroButton, rightStack, digitsStack, equalButton)
-        upperLineStack.backgroundColor = .brown
-        digitsStack.backgroundColor = .orange
         addDigitsBlock()
         addButtons(toStack: upperLineStack, buttonsCount: 3, increaseTegBy: 0)
         addButtons(toStack: rightStack, buttonsCount: 2, increaseTegBy: 3)
@@ -129,8 +127,7 @@ extension NumPadView {
             clearButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             clearButton.bottomAnchor.constraint(equalTo: upperLineStack.bottomAnchor),
             clearButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1), //patternView.heightAnchor
-            clearButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2)
-            
+            clearButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2155)
         ])
         
         upperLineStack.translatesAutoresizingMaskIntoConstraints = false
@@ -140,7 +137,6 @@ extension NumPadView {
             upperLineStack.trailingAnchor.constraint(equalTo: trailingAnchor),
             upperLineStack.heightAnchor.constraint(equalTo: clearButton.heightAnchor)
         ])
-        
         
         rightStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
