@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
         createView(backColor: .systemGray4, borderColor: UIColor.clear.cgColor, cRadius: 15)
     }()
     
-    private lazy var numberView: UIView = {
+    lazy var numberView: UIView = {
         createView(backColor: .white, borderColor: UIColor.black.cgColor)
     }()
     
@@ -29,7 +29,31 @@ class MainViewController: UIViewController {
         createTitle(text: "3", size: 45, color: .black)
     }()
     
-    private let numPadView = NumPadView()
+    private let numPadView = UIView()
+    //NumPad
+    
+    let clearButton = NumPadButton()
+    let equalButton = NumPadButton()
+    let zeroButton = NumPadButton()
+    let dotButton = NumPadButton()
+    
+    lazy var digitsStack: UIStackView = {
+        createStack(axis: .vertical, spacing: 30, distrib: .fillEqually) //высота оступа
+    }()
+    
+    lazy var upperLineStack: UIStackView = {
+        createStack(axis: .horizontal, spacing: 15, distrib: .fillEqually)
+    }()
+    
+    lazy var rightStack: UIStackView = {
+        createStack(axis: .vertical, spacing: 30, distrib: .fillEqually)
+    }()
+    //костыль
+    lazy var digitsBottomStack: UIStackView = {
+        createStack(axis: .horizontal, spacing: 15, distrib: .fillEqually)
+    }()
+    
+    
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -47,6 +71,22 @@ class MainViewController: UIViewController {
         patternView.addSubview(numberView)
         numberView.addSubview(numberLabel)
         patternView.addSubview(numPadView)
+        
+        //NumPad
+        numPadView.addSubview(clearButton)
+        numPadView.addSubview(upperLineStack)
+        numberView.addSubview(dotButton)
+        numPadView.addSubview(zeroButton)
+        numPadView.addSubview(rightStack)
+        numPadView.addSubview(digitsStack)
+        numberView.addSubview(equalButton)
+        
+        addButtons(toStack: upperLineStack, withCountOfButtons: 3)
+        addButtons(toStack: rightStack, withCountOfButtons: 2)
+        addDigitsBlock()
+        
+        digitsStack.addArrangedSubview(digitsBottomStack)
+        addLowerDigitsBlockLine()
     }
     
     func createView(backColor: UIColor, borderColor: CGColor, cRadius: CGFloat = 0) -> UIView {
@@ -67,6 +107,65 @@ class MainViewController: UIViewController {
         label.minimumScaleFactor = 0.7
         label.textAlignment = .right
         return label
+    }
+    //NumPadView methods
+    func addButtons(toStack stack: UIStackView, withCountOfButtons count: Int) {
+        let buttonsPerRow = count
+        
+        for _ in 0..<buttonsPerRow {
+            let button = NumPadButton()
+            stack.addArrangedSubview(button)
+        }
+    }
+    
+    func addLowerDigitsBlockLine(){
+        let buttonsPerRow = 3
+        
+        for i in 0..<buttonsPerRow {
+            let button = NumPadButton()
+            button.setTitle("\(i + 1)", for: .normal)
+            button.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
+            digitsBottomStack.addArrangedSubview(button)
+        }
+    }
+    
+    func addDigitsBlock() {
+        let numberOfRows = 2
+        let buttonsPerRow = 3
+        var counter = 0
+        
+        for _ in 0..<numberOfRows {
+            
+            let HStack = createStack(axis: .horizontal, spacing: 15, distrib: .fillEqually) //ширина оступа
+            
+            for _ in 0..<buttonsPerRow {
+                let button = NumPadButton()
+                button.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
+                button.tag = counter + 1
+                
+                if counter >= 3 {
+                    button.setTitle("\(counter + 1)", for: .normal)
+                } else {
+                    button.setTitle("\(counter + 7)", for: .normal)
+                }
+                HStack.addArrangedSubview(button)
+                counter += 1
+            }
+            digitsStack.addArrangedSubview(HStack)
+        }
+    }
+    
+    func createStack(axis: NSLayoutConstraint.Axis, spacing: CGFloat, distrib:UIStackView.Distribution) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = axis
+        stackView.distribution = distrib
+        stackView.spacing = spacing
+        return stackView
+    }
+    
+    @objc func mocFunc() {
+        
     }
 }
 
@@ -120,6 +219,67 @@ extension MainViewController {
             numPadView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 40),
             numPadView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -45),
             numPadView.bottomAnchor.constraint(equalTo: patternView.bottomAnchor, constant: -50)
+        ])
+        
+        //NumPad------------
+        
+        clearButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            clearButton.topAnchor.constraint(equalTo: numPadView.topAnchor),
+            clearButton.leadingAnchor.constraint(equalTo: numPadView.leadingAnchor),
+            clearButton.bottomAnchor.constraint(equalTo: upperLineStack.bottomAnchor),
+            clearButton.heightAnchor.constraint(equalTo: patternView.heightAnchor, multiplier: 0.1),
+            clearButton.widthAnchor.constraint(equalTo: numberView.widthAnchor, multiplier: 0.2)
+            
+        ])
+        
+        upperLineStack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            upperLineStack.topAnchor.constraint(equalTo: numPadView.topAnchor),
+            upperLineStack.leadingAnchor.constraint(equalTo: clearButton.trailingAnchor, constant: 15),
+            upperLineStack.trailingAnchor.constraint(equalTo: numPadView.trailingAnchor),
+            upperLineStack.heightAnchor.constraint(equalTo: clearButton.heightAnchor)
+        ])
+        
+        
+        rightStack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            rightStack.widthAnchor.constraint(equalTo: clearButton.widthAnchor),
+            rightStack.topAnchor.constraint(equalTo: clearButton.bottomAnchor, constant: 30),
+            rightStack.trailingAnchor.constraint(equalTo: numPadView.trailingAnchor),
+            rightStack.bottomAnchor.constraint(equalTo: equalButton.topAnchor, constant: -30)
+        ])
+        
+        equalButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            equalButton.topAnchor.constraint(equalTo: digitsBottomStack.topAnchor),
+            equalButton.leadingAnchor.constraint(equalTo: digitsStack.trailingAnchor, constant: 15),
+            equalButton.trailingAnchor.constraint(equalTo: numPadView.trailingAnchor),
+            equalButton.bottomAnchor.constraint(equalTo: numPadView.bottomAnchor),
+        ])
+        
+        digitsStack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            digitsStack.topAnchor.constraint(equalTo: upperLineStack.bottomAnchor, constant: 30),
+            digitsStack.leadingAnchor.constraint(equalTo: numPadView.leadingAnchor),
+            digitsStack.trailingAnchor.constraint(equalTo: rightStack.leadingAnchor, constant: -15),
+            digitsStack.bottomAnchor.constraint(equalTo: zeroButton.topAnchor, constant: -30)
+        ])
+        
+        dotButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dotButton.heightAnchor.constraint(equalTo: clearButton.heightAnchor),
+            dotButton.widthAnchor.constraint(equalTo: clearButton.widthAnchor),
+            dotButton.leadingAnchor.constraint(equalTo: zeroButton.trailingAnchor, constant: 15),
+            dotButton.trailingAnchor.constraint(equalTo: digitsStack.trailingAnchor),
+            dotButton.bottomAnchor.constraint(equalTo: numPadView.bottomAnchor),
+        ])
+        
+        zeroButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            zeroButton.heightAnchor.constraint(equalTo: clearButton.heightAnchor),
+            zeroButton.leadingAnchor.constraint(equalTo: numPadView.leadingAnchor),
+            zeroButton.bottomAnchor.constraint(equalTo: numPadView.bottomAnchor),
         ])
         
     }

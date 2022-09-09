@@ -31,10 +31,10 @@ class NumPadButton: UIButton {
         layer.shadowOffset = CGSize(width: 7 , height: 7)
         layer.shadowOpacity = 1
         layer.shadowRadius = 0
-        addTarget(self, action: #selector(methods), for: .touchUpInside)
+        
     }
     
     @objc func methods() {
-        print("Hello")
+        print(tag)
     }
 }
