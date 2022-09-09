@@ -21,11 +21,11 @@ class MainViewController: UIViewController {
         createView(backColor: .systemGray4, borderColor: UIColor.clear.cgColor, cRadius: 15)
     }()
     
-    private lazy var numberView: UIView = {
+    lazy var numberView: UIView = {
         createView(backColor: .white, borderColor: UIColor.black.cgColor)
     }()
     
-    private lazy var numberLabel: UILabel = {
+    lazy var numberLabel: UILabel = {
         createTitle(text: "3", size: 45, color: .black)
     }()
     
@@ -121,6 +121,5 @@ extension MainViewController {
             numPadView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -45),
             numPadView.bottomAnchor.constraint(equalTo: patternView.bottomAnchor, constant: -50)
         ])
-        
     }
 }
