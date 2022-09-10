@@ -9,7 +9,9 @@ import UIKit
 
 class NumPadView: UIView {
     
-    private let operation = ["=","/","*","-","+"]
+    weak var mainVCDelegate: MainViewControllerDeleagte?
+
+    private let operations = ["=","/","*","-","+"]  //нужны ли тут?
     
     private let clearButton = NumPadButton()
     private let equalButton = NumPadButton()
@@ -27,20 +29,7 @@ class NumPadView: UIView {
         super.init(frame: frame)
         setUpView()
         setUpConstraints()
-        
-        //Проверка
-        clearButton.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
-        clearButton.setTitle("C", for: .normal)
-        
-        zeroButton.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
-        zeroButton.setTitle("0", for: .normal)
-        zeroButton.titleLabel?.textAlignment = .right
-        
-        equalButton.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
-        equalButton.setTitle("=", for: .normal)
-        
-        dotButton.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
-        dotButton.setTitle(".", for: .normal)
+        setUpActions()
     }
     
     required init?(coder: NSCoder) {
@@ -48,14 +37,28 @@ class NumPadView: UIView {
     }
     
     //MARK: - Methods
-    private func setUpView(){
+    func setUpView(){
         setupSubViews(clearButton, upperLineStack, dotButton, zeroButton, rightStack, digitsStack, equalButton)
         addDigitsBlock()
         addButtons(toStack: upperLineStack, buttonsCount: 3, increaseTegBy: 0)
         addButtons(toStack: rightStack, buttonsCount: 2, increaseTegBy: 3)
     }
     
-    private func addDigitsBlock() {
+    func setUpActions() {
+        dotButton.setTitle(".", for: .normal)
+        dotButton.addTarget(self, action: #selector(numButtonPressed(_:)), for: .touchUpInside)
+        
+        zeroButton.setTitle("0", for: .normal)
+        zeroButton.addTarget(self, action: #selector(numButtonPressed(_:)), for: .touchUpInside)
+        
+        clearButton.setTitle("C", for: .normal)
+        clearButton.addTarget(self, action: #selector(clearButtonPressed(_:)), for: .touchUpInside)
+        
+        equalButton.setTitle("=", for: .normal)
+        equalButton.addTarget(self, action:#selector(operationButtonPressed), for: .touchUpInside)
+    }
+    
+    func addDigitsBlock() {
         var counter = 1
         
         for stack in [digitsUpperStack, digitsCenterStack, digitsBottomStack] {
@@ -71,8 +74,7 @@ class NumPadView: UIView {
                     button.setTitle("\(counter + 6)", for: .normal)
                 }
                 
-                button.tag = counter
-                button.addTarget(self, action: #selector(mocFunc(_:)), for: .touchUpInside)
+                button.addTarget(self, action: #selector(numButtonPressed(_:)), for: .touchUpInside)
                 stack.addArrangedSubview(button)
                 counter += 1
             }
@@ -80,7 +82,7 @@ class NumPadView: UIView {
         }
     }
     
-    private func createStack(axis: NSLayoutConstraint.Axis, spacing: CGFloat) -> UIStackView {
+    func createStack(axis: NSLayoutConstraint.Axis, spacing: CGFloat) -> UIStackView {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = axis
@@ -89,33 +91,38 @@ class NumPadView: UIView {
         return stackView
     }
     
-    private func addButtons(toStack stack: UIStackView, buttonsCount: Int, increaseTegBy num: Int) {
+    func addButtons(toStack stack: UIStackView, buttonsCount: Int, increaseTegBy num: Int) {
         let buttonsPerRow = buttonsCount
         
         for i in 0..<buttonsPerRow {
             let button = NumPadButton()
             button.tag = (i + num)
-            button.setTitle(operation[button.tag], for: .normal)
-            button.addTarget(self, action: #selector(mocFunc), for: .touchUpInside)
+            button.setTitle(operations[button.tag], for: .normal)
+            button.addTarget(self, action: #selector(operationButtonPressed), for: .touchUpInside)
             stack.addArrangedSubview(button)
         }
     }
     
-    private func setupSubViews(_ subviews: UIView...) {
+    func setupSubViews(_ subviews: UIView...) {
         subviews.forEach { subview in
             addSubview(subview)
         }
     }
     
-    //MARK: - Action
-    
-    @objc func mocFunc(_ sender: UIButton) {
-        print(sender.tag)
+    //MARK: - Actions
+    @objc private func numButtonPressed(_ sender: UIButton) {  //проверяет на 0 и добавляет числа(так же должна проверять на .)
+        mainVCDelegate?.numButtonPressed(withValue: sender.titleLabel?.text ?? "Error")
     }
     
-    func zeroPressed() {
-        
+    @objc private func operationButtonPressed(_ sender: UIButton) {  //должен быть тег
+        mainVCDelegate?.operationPressed(withTag: sender.tag)
     }
+    
+    @objc private func clearButtonPressed(_ sender: UIButton) {  //должна отчищать, присваивать операции nill, делать firstNumber = 0
+        mainVCDelegate?.clearButtonPressed()
+    }
+    
+    
 }
 
 //MARK: - Constraints Adjusting
@@ -126,8 +133,10 @@ extension NumPadView {
             clearButton.topAnchor.constraint(equalTo: topAnchor),
             clearButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             clearButton.bottomAnchor.constraint(equalTo: upperLineStack.bottomAnchor),
-            clearButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1), //patternView.heightAnchor
+            clearButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
             clearButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2155)
+            //(UIScreen.main.bounds.height - (30*4)) / 5)
+            //(UIScreen.main.bounds.width - (15*3)) / 5)
         ])
         
         upperLineStack.translatesAutoresizingMaskIntoConstraints = false

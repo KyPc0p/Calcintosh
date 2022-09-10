@@ -7,28 +7,27 @@
 
 import UIKit
 
+protocol MainViewControllerDeleagte: AnyObject {
+    func numButtonPressed(withValue value: String)
+    func operationPressed(withTag tag: Int)
+    func clearButtonPressed()
+}
+
 class MainViewController: UIViewController {
+
+    var firstNumber: Double = 0
+    var resultNumber: Double = 0
+    var currentOperation: Operation?
     
-    private lazy var titleLabel: UILabel = {
-        createTitle(text: "Calculator", size: 60, color: .white)
-    }()
+    enum Operation {
+        case add, subtract, miltiply, devide
+    }
     
-    private lazy var titleRect: UIView = {
-        createView(backColor: .black, borderColor: UIColor.white.cgColor)
-    }()
-    
-    private lazy var patternView: UIView = {
-        createView(backColor: .systemGray4, borderColor: UIColor.clear.cgColor, cRadius: 15)
-    }()
-    
-    lazy var numberView: UIView = {
-        createView(backColor: .white, borderColor: UIColor.black.cgColor)
-    }()
-    
-    lazy var numberLabel: UILabel = {
-        createTitle(text: "3", size: 45, color: .black)
-    }()
-    
+    lazy var titleLabel = createTitle(text: "Calculator", size: 60, color: .white)
+    private lazy var titleRect = createView(backColor: .black, borderColor: UIColor.white.cgColor)
+    private lazy var patternView = createView(backColor: .systemGray4, borderColor: UIColor.clear.cgColor, cRadius: 15)
+    private lazy var resultView = createView(backColor: .white, borderColor: UIColor.black.cgColor)
+    private lazy var resultLabel = createTitle(text: "0", size: 45, color: .black)
     private let numPadView = NumPadView()
     
     //MARK: - ViewDidLoad
@@ -36,20 +35,21 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setConstraints()
+        numPadView.mainVCDelegate = self
     }
     
     //MARK: - Methods
-    func setupViews(){
+    private func setupViews(){
         view.backgroundColor = .black
         view.addSubview(titleLabel)
         view.addSubview(titleRect)
         view.addSubview(patternView)
-        patternView.addSubview(numberView)
-        numberView.addSubview(numberLabel)
+        patternView.addSubview(resultView)
+        resultView.addSubview(resultLabel)
         patternView.addSubview(numPadView)
     }
-    
-    func createView(backColor: UIColor, borderColor: CGColor, cRadius: CGFloat = 0) -> UIView {
+
+    private func createView(backColor: UIColor, borderColor: CGColor, cRadius: CGFloat = 0) -> UIView {
         let view = UIView()
         view.backgroundColor = backColor
         view.layer.borderColor = borderColor
@@ -58,7 +58,7 @@ class MainViewController: UIViewController {
         return view
     }
     
-    func createTitle(text: String = "", size: CGFloat, color: UIColor) -> UILabel {
+    private func createTitle(text: String = "", size: CGFloat, color: UIColor) -> UILabel {
         let label = UILabel()
         label.text = text
         label.font = UIFont(name: "sysfont", size: size)
@@ -67,6 +67,61 @@ class MainViewController: UIViewController {
         label.minimumScaleFactor = 0.7
         label.textAlignment = .right
         return label
+    }
+}
+
+//MARK: - MainViewControllerDeleagte
+extension MainViewController: MainViewControllerDeleagte {
+    func numButtonPressed(withValue value: String) {
+        if resultLabel.text == "0"{
+            resultLabel.text = value
+        } else if let text = resultLabel.text {
+            resultLabel.text = "\(text)\(value)"
+        }
+    }
+    
+    func operationPressed(withTag tag: Int) {
+        if let text = resultLabel.text, let value = Double(text), firstNumber == 0 {
+            firstNumber = value
+            resultLabel.text = "0"
+        }
+        
+        if tag == 0 {
+            if let operation = currentOperation {
+                var secondNumber: Double = 0
+                if let text = resultLabel.text, let value = Double(text) {
+                    secondNumber = value
+                }
+                switch operation {
+                case .devide:
+                    resultLabel.text = "\(firstNumber / secondNumber)"
+                    break
+                case .miltiply:
+                    resultLabel.text = "\(firstNumber * secondNumber)"
+                    break
+                case .subtract:
+                    resultLabel.text = "\(firstNumber - secondNumber)"
+                    break
+                case .add:
+                    resultLabel.text = "\(firstNumber + secondNumber)"
+                    break
+                }
+            }
+        }else if tag == 1 {
+            currentOperation = .devide
+        }else if tag == 2 {
+            currentOperation = .miltiply
+        }else if tag == 3 {
+            currentOperation = .subtract
+        }else if tag == 4 {
+            currentOperation = .add
+        }
+    }
+    
+    func clearButtonPressed() {
+        resultLabel.text = "0"
+        currentOperation = nil
+        firstNumber = 0
     }
 }
 
@@ -98,25 +153,25 @@ extension MainViewController {
             patternView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        numberView.translatesAutoresizingMaskIntoConstraints = false
+        resultView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            numberView.topAnchor.constraint(equalTo: patternView.topAnchor, constant: 25),
-            numberView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 35),
-            numberView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -40),
-            numberView.bottomAnchor.constraint(equalTo: patternView.topAnchor, constant: 110)
+            resultView.topAnchor.constraint(equalTo: patternView.topAnchor, constant: 25),
+            resultView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 35),
+            resultView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -40),
+            resultView.bottomAnchor.constraint(equalTo: patternView.topAnchor, constant: 110)
         ])
         
-        numberLabel.translatesAutoresizingMaskIntoConstraints = false
+        resultLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            numberLabel.topAnchor.constraint(equalTo: numberView.topAnchor, constant: 25),
-            numberLabel.leadingAnchor.constraint(equalTo: numberView.leadingAnchor, constant: 15),
-            numberLabel.trailingAnchor.constraint(equalTo: numberView.trailingAnchor, constant: -15),
-            numberLabel.bottomAnchor.constraint(equalTo: numberView.bottomAnchor, constant: -20)
+            resultLabel.topAnchor.constraint(equalTo: resultView.topAnchor, constant: 25),
+            resultLabel.leadingAnchor.constraint(equalTo: resultView.leadingAnchor, constant: 15),
+            resultLabel.trailingAnchor.constraint(equalTo: resultView.trailingAnchor, constant: -15),
+            resultLabel.bottomAnchor.constraint(equalTo: resultView.bottomAnchor, constant: -20)
         ])
         
         numPadView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            numPadView.topAnchor.constraint(equalTo: numberView.bottomAnchor, constant: 20),
+            numPadView.topAnchor.constraint(equalTo: resultView.bottomAnchor, constant: 20),
             numPadView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 40),
             numPadView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -45),
             numPadView.bottomAnchor.constraint(equalTo: patternView.bottomAnchor, constant: -50)
