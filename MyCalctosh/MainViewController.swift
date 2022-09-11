@@ -11,7 +11,6 @@ protocol MainViewControllerDeleagte: AnyObject {
     func numButtonPressed(withValue value: String)
     func operationPressed(withTag tag: Int)
     func clearButtonPressed()
-    func dotButtonPressed()
 }
 
 class MainViewController: UIViewController {
@@ -71,77 +70,67 @@ class MainViewController: UIViewController {
         label.textAlignment = .right
         return label
     }
+    
 }
 
 //MARK: - MainViewControllerDeleagte
 extension MainViewController: MainViewControllerDeleagte {
     func numButtonPressed(withValue value: String) {
         
-        //проблема в проверке, он видит что не 0 и ДОБАВЛЯЕТ символы к строке
-        
-        
-        if resultLabel.text == "0" {
-            resultLabel.text = value //печатает 1 новый символ
-        } else if let text = resultLabel.text {
-            resultLabel.text = "\(text)\(value)" //печать с объединением старых символов
+        if operationIsActive == false {
+            if resultLabel.text == "0" {
+                dotButtonCheck(value)
+            } else if let text = resultLabel.text {
+                resultLabel.text = "\(text)\(value)"
+            }
+        } else {
+            dotButtonCheck(value)
+            operationIsActive = false
         }
-
+        
         print("Нажата кнопка \(resultLabel.text!)")
     }
     
     func operationPressed(withTag tag: Int) {
-        var interTag = tag
+        print("нажата операция \(currentOperation),f \(firstNumber), sec \(secondNumber), в окне выведено \(resultLabel.text!) НАЧАЛО")
+        operationIsActive = true
         if let text = resultLabel.text, let value = Double(text), firstNumber == 0 {
             firstNumber = value
-            resultLabel.text = "0"
-        } else {
-            interTag = 0
-            print("tag изменен и операция перешла на =")
         }
         
-        if interTag == 0 {
+        if tag == 0 {
             if let operation = currentOperation {
                 if let text = resultLabel.text, let value = Double(text) {
                     secondNumber = value
+                    
+                    print(firstNumber)
+                    print(secondNumber)
                 }
                 switch operation {
                 case .devide:
-                    resultLabel.text = "\(firstNumber / secondNumber)"
-                    
-                    interTag = tag
+                    resultLabel.text = "\(firstNumber / secondNumber)" //при повторении = на /, не правильная логика
                 case .miltiply:
                     resultLabel.text = "\(firstNumber * secondNumber)"
-                    
-                    interTag = tag
                 case .subtract:
-                    resultLabel.text = "\(firstNumber - secondNumber)"
-
-                    interTag = tag
+                    resultLabel.text = "\(firstNumber - secondNumber)" //при повторении = на -, не правильная логика
                 case .add:
                     resultLabel.text = "\(firstNumber + secondNumber)"
-                    
-                    interTag = tag
                 }
+                operationIsActive = false
+                firstNumber = 0
+                secondNumber = 0
             }
-        }else if interTag == 1 {
+        }else if tag == 1 {
             currentOperation = .devide
-        }else if interTag == 2 {
+        }else if tag == 2 {
             currentOperation = .miltiply
-        }else if interTag == 3 {
+        }else if tag == 3 {
             currentOperation = .subtract
-        }else if interTag == 4 {
+        }else if tag == 4 {
             currentOperation = .add
         }
         
-        print("нажата операция \(currentOperation),f \(firstNumber), sec \(secondNumber), в окне выведено \(resultLabel.text!) ")
-    }
-    
-    func dotButtonPressed() {
-        if resultLabel.text == "0" {
-            resultLabel.text = "0."
-        } else if let text = resultLabel.text {
-            resultLabel.text = "\(text)."
-        }
+        print("нажата операция \(currentOperation),f \(firstNumber), sec \(secondNumber), в окне выведено \(resultLabel.text!) КОНЕЦ")
     }
     
     func clearButtonPressed() {
@@ -149,6 +138,14 @@ extension MainViewController: MainViewControllerDeleagte {
         currentOperation = nil
         firstNumber = 0
         secondNumber = 0
+    }
+    
+    func dotButtonCheck(_ value: String) {
+        if value == "." {
+            resultLabel.text = "0\(value)"
+        } else {
+            resultLabel.text = value
+        }
     }
 }
 

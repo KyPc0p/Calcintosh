@@ -46,7 +46,7 @@ class NumPadView: UIView {
     
     func setUpActions() {
         dotButton.setTitle(".", for: .normal)
-        dotButton.addTarget(self, action: #selector(dotButtonPressed(_:)), for: .touchUpInside)
+        dotButton.addTarget(self, action: #selector(numButtonPressed(_:)), for: .touchUpInside)
         
         zeroButton.setTitle("0", for: .normal)
         zeroButton.addTarget(self, action: #selector(numButtonPressed(_:)), for: .touchUpInside)
@@ -116,10 +116,6 @@ class NumPadView: UIView {
     
     @objc private func operationButtonPressed(_ sender: UIButton) {  //должен быть тег
         mainVCDelegate?.operationPressed(withTag: sender.tag)
-    }
-    
-    @objc private func dotButtonPressed(_ sender: UIButton) {  
-        mainVCDelegate?.dotButtonPressed()
     }
     
     @objc private func clearButtonPressed(_ sender: UIButton) {  //должна отчищать, присваивать операции nill, делать firstNumber = 0
