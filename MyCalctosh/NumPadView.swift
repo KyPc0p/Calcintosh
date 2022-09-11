@@ -9,9 +9,7 @@ import UIKit
 
 class NumPadView: UIView {
     
-    weak var mainVCDelegate: MainViewControllerDeleagte?
-
-    private let operations = ["=","/","*","-","+"]  //нужны ли тут?
+    weak var mainVCDelegate: MainViewControllerDelegate?  //узнать про протокол
     
     private let clearButton = NumPadButton()
     private let equalButton = NumPadButton()
@@ -33,7 +31,7 @@ class NumPadView: UIView {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("init \(coder) has not been implemented")
     }
     
     //MARK: - Methods
@@ -93,6 +91,7 @@ class NumPadView: UIView {
     
     func addButtons(toStack stack: UIStackView, buttonsCount: Int, increaseTegBy num: Int) {
         let buttonsPerRow = buttonsCount
+        let operations = ["=","/","*","-","+"]
         
         for i in 0..<buttonsPerRow {
             let button = NumPadButton()
@@ -110,22 +109,20 @@ class NumPadView: UIView {
     }
     
     //MARK: - Actions
-    @objc private func numButtonPressed(_ sender: UIButton) {  //проверяет на 0 и добавляет числа(так же должна проверять на .)
+    @objc private func numButtonPressed(_ sender: UIButton) {
         mainVCDelegate?.numButtonPressed(withValue: sender.titleLabel?.text ?? "Error")
     }
     
-    @objc private func operationButtonPressed(_ sender: UIButton) {  //должен быть тег
+    @objc private func operationButtonPressed(_ sender: UIButton) {
         mainVCDelegate?.operationPressed(withTag: sender.tag)
     }
     
-    @objc private func clearButtonPressed(_ sender: UIButton) {  //должна отчищать, присваивать операции nill, делать firstNumber = 0
+    @objc private func clearButtonPressed(_ sender: UIButton) {
         mainVCDelegate?.clearButtonPressed()
     }
-    
-    
 }
 
-//MARK: - Constraints Adjusting
+//MARK: - Constraints 
 extension NumPadView {
     func setUpConstraints() {
         clearButton.translatesAutoresizingMaskIntoConstraints = false
