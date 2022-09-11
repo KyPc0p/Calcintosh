@@ -11,13 +11,16 @@ protocol MainViewControllerDeleagte: AnyObject {
     func numButtonPressed(withValue value: String)
     func operationPressed(withTag tag: Int)
     func clearButtonPressed()
+    func dotButtonPressed()
 }
 
 class MainViewController: UIViewController {
 
     var firstNumber: Double = 0
-    var resultNumber: Double = 0
+    var secondNumber: Double = 0 //???? что это
+    var perfomMath = false
     var currentOperation: Operation?
+    var operationIsActive = false
     
     enum Operation {
         case add, subtract, miltiply, devide
@@ -73,48 +76,71 @@ class MainViewController: UIViewController {
 //MARK: - MainViewControllerDeleagte
 extension MainViewController: MainViewControllerDeleagte {
     func numButtonPressed(withValue value: String) {
-        if resultLabel.text == "0"{
-            resultLabel.text = value
+        
+        //проблема в проверке, он видит что не 0 и ДОБАВЛЯЕТ символы к строке
+        
+        
+        if resultLabel.text == "0" {
+            resultLabel.text = value //печатает 1 новый символ
         } else if let text = resultLabel.text {
-            resultLabel.text = "\(text)\(value)"
+            resultLabel.text = "\(text)\(value)" //печать с объединением старых символов
         }
+
+        print("Нажата кнопка \(resultLabel.text!)")
     }
     
     func operationPressed(withTag tag: Int) {
+        var interTag = tag
         if let text = resultLabel.text, let value = Double(text), firstNumber == 0 {
             firstNumber = value
             resultLabel.text = "0"
+        } else {
+            interTag = 0
+            print("tag изменен и операция перешла на =")
         }
         
-        if tag == 0 {
+        if interTag == 0 {
             if let operation = currentOperation {
-                var secondNumber: Double = 0
                 if let text = resultLabel.text, let value = Double(text) {
                     secondNumber = value
                 }
                 switch operation {
                 case .devide:
                     resultLabel.text = "\(firstNumber / secondNumber)"
-                    break
+                    
+                    interTag = tag
                 case .miltiply:
                     resultLabel.text = "\(firstNumber * secondNumber)"
-                    break
+                    
+                    interTag = tag
                 case .subtract:
                     resultLabel.text = "\(firstNumber - secondNumber)"
-                    break
+
+                    interTag = tag
                 case .add:
                     resultLabel.text = "\(firstNumber + secondNumber)"
-                    break
+                    
+                    interTag = tag
                 }
             }
-        }else if tag == 1 {
+        }else if interTag == 1 {
             currentOperation = .devide
-        }else if tag == 2 {
+        }else if interTag == 2 {
             currentOperation = .miltiply
-        }else if tag == 3 {
+        }else if interTag == 3 {
             currentOperation = .subtract
-        }else if tag == 4 {
+        }else if interTag == 4 {
             currentOperation = .add
+        }
+        
+        print("нажата операция \(currentOperation),f \(firstNumber), sec \(secondNumber), в окне выведено \(resultLabel.text!) ")
+    }
+    
+    func dotButtonPressed() {
+        if resultLabel.text == "0" {
+            resultLabel.text = "0."
+        } else if let text = resultLabel.text {
+            resultLabel.text = "\(text)."
         }
     }
     
@@ -122,6 +148,7 @@ extension MainViewController: MainViewControllerDeleagte {
         resultLabel.text = "0"
         currentOperation = nil
         firstNumber = 0
+        secondNumber = 0
     }
 }
 
