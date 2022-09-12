@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7905E3D028CF73BB00EE9001 /* ChiKareGo2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7905E3CC28CF73BB00EE9001 /* ChiKareGo2.ttf */; };
 		7968538628C73CDD00F2CCF4 /* NumPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7968538528C73CDD00F2CCF4 /* NumPadView.swift */; };
 		79B2685028C88E87001AD145 /* NumPadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B2684F28C88E87001AD145 /* NumPadButton.swift */; };
 		79C617A528C5AD03005C669B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C617A428C5AD03005C669B /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7905E3CC28CF73BB00EE9001 /* ChiKareGo2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChiKareGo2.ttf; sourceTree = "<group>"; };
 		7968538528C73CDD00F2CCF4 /* NumPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadView.swift; sourceTree = "<group>"; };
 		79B2684F28C88E87001AD145 /* NumPadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadButton.swift; sourceTree = "<group>"; };
 		79C617A128C5AD03005C669B /* MyCalctosh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCalctosh.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +43,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7905E3C328CF362000EE9001 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				79C617A428C5AD03005C669B /* AppDelegate.swift */,
+				79C617A628C5AD03005C669B /* SceneDelegate.swift */,
+				79C617B228C5AD06005C669B /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7905E3C428CF365300EE9001 /* Resources  */ = {
+			isa = PBXGroup;
+			children = (
+				79C617AD28C5AD06005C669B /* Assets.xcassets */,
+				79C617C128C5D5A5005C669B /* Fonts */,
+			);
+			path = "Resources ";
+			sourceTree = "<group>";
+		};
+		7905E3C528CF367F00EE9001 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7968538528C73CDD00F2CCF4 /* NumPadView.swift */,
+				79B2684F28C88E87001AD145 /* NumPadButton.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		79C6179828C5AD03005C669B = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +90,11 @@
 		79C617A328C5AD03005C669B /* MyCalctosh */ = {
 			isa = PBXGroup;
 			children = (
-				79C617A428C5AD03005C669B /* AppDelegate.swift */,
-				79C617A628C5AD03005C669B /* SceneDelegate.swift */,
 				79C617A828C5AD03005C669B /* MainViewController.swift */,
-				7968538528C73CDD00F2CCF4 /* NumPadView.swift */,
-				79B2684F28C88E87001AD145 /* NumPadButton.swift */,
-				79C617AD28C5AD06005C669B /* Assets.xcassets */,
 				79C617AF28C5AD06005C669B /* LaunchScreen.storyboard */,
-				79C617C128C5D5A5005C669B /* Fonts */,
-				79C617B228C5AD06005C669B /* Info.plist */,
+				7905E3C528CF367F00EE9001 /* Views */,
+				7905E3C428CF365300EE9001 /* Resources  */,
+				7905E3C328CF362000EE9001 /* App */,
 			);
 			path = MyCalctosh;
 			sourceTree = "<group>";
@@ -76,6 +102,7 @@
 		79C617C128C5D5A5005C669B /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				7905E3CC28CF73BB00EE9001 /* ChiKareGo2.ttf */,
 				79C617BF28C5D56A005C669B /* sysfont.otf */,
 			);
 			path = Fonts;
@@ -142,6 +169,7 @@
 				79C617B128C5AD06005C669B /* LaunchScreen.storyboard in Resources */,
 				79C617C028C5D56A005C669B /* sysfont.otf in Resources */,
 				79C617AE28C5AD06005C669B /* Assets.xcassets in Resources */,
+				7905E3D028CF73BB00EE9001 /* ChiKareGo2.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,7 +325,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KKH4UHMTXR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyCalctosh/Info.plist;
+				INFOPLIST_FILE = MyCalctosh/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
@@ -327,7 +355,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KKH4UHMTXR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyCalctosh/Info.plist;
+				INFOPLIST_FILE = MyCalctosh/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;

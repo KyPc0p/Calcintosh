@@ -8,6 +8,7 @@
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>ChiKareGo2.ttf</string>
 		<string>sysfont.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>

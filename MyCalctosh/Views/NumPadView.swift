@@ -9,16 +9,18 @@ import UIKit
 
 class NumPadView: UIView {
     
-    weak var mainVCDelegate: MainViewControllerDelegate?  //узнать про протокол
+    private let spacer = UIScreen.main.bounds.width / 18
+    
+    weak var mainVCDelegate: NumPadViewDelegate!
     
     private let clearButton = NumPadButton()
     private let equalButton = NumPadButton()
     private let zeroButton = NumPadButton()
     private let dotButton = NumPadButton()
     
-    private lazy var digitsStack = createStack(axis: .vertical, spacing: 30)
+    private lazy var digitsStack = createStack(axis: .vertical, spacing: spacer)
     private lazy var upperLineStack = createStack(axis: .horizontal, spacing: 15)
-    private lazy var rightStack = createStack(axis: .vertical, spacing: 30)
+    private lazy var rightStack = createStack(axis: .vertical, spacing: spacer)
     private lazy var digitsUpperStack = createStack(axis: .horizontal, spacing: 15)
     private lazy var digitsBottomStack = createStack(axis: .horizontal, spacing: 15)
     private lazy var digitsCenterStack = createStack(axis: .horizontal, spacing: 15)
@@ -48,12 +50,15 @@ class NumPadView: UIView {
         
         zeroButton.setTitle("0", for: .normal)
         zeroButton.addTarget(self, action: #selector(numButtonPressed(_:)), for: .touchUpInside)
+        zeroButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
+        zeroButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacer , bottom: 0, right: 0)
         
         clearButton.setTitle("C", for: .normal)
         clearButton.addTarget(self, action: #selector(clearButtonPressed(_:)), for: .touchUpInside)
         
         equalButton.setTitle("=", for: .normal)
         equalButton.addTarget(self, action:#selector(operationButtonPressed), for: .touchUpInside)
+        equalButton.contentVerticalAlignment = UIControl.ContentVerticalAlignment.bottom
     }
 
     func addDigitsBlock() {
@@ -97,6 +102,9 @@ class NumPadView: UIView {
             let button = NumPadButton()
             button.tag = (i + num)
             button.setTitle(operations[button.tag], for: .normal)
+            if button.tag == 2 {
+                button.titleLabel!.font =  UIFont(name: "ChiKareGo2", size: 60)
+            }
             button.addTarget(self, action: #selector(operationButtonPressed), for: .touchUpInside)
             stack.addArrangedSubview(button)
         }
@@ -130,10 +138,8 @@ extension NumPadView {
             clearButton.topAnchor.constraint(equalTo: topAnchor),
             clearButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             clearButton.bottomAnchor.constraint(equalTo: upperLineStack.bottomAnchor),
-            clearButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
+            clearButton.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.15),
             clearButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.2155)
-            //(UIScreen.main.bounds.height - (30*4)) / 5)
-            //(UIScreen.main.bounds.width - (15*3)) / 5)
         ])
         
         upperLineStack.translatesAutoresizingMaskIntoConstraints = false
@@ -147,9 +153,9 @@ extension NumPadView {
         rightStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             rightStack.widthAnchor.constraint(equalTo: clearButton.widthAnchor),
-            rightStack.topAnchor.constraint(equalTo: clearButton.bottomAnchor, constant: 30),
+            rightStack.topAnchor.constraint(equalTo: clearButton.bottomAnchor, constant: spacer),
             rightStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-            rightStack.bottomAnchor.constraint(equalTo: equalButton.topAnchor, constant: -30)
+            rightStack.bottomAnchor.constraint(equalTo: equalButton.topAnchor, constant: -spacer)
         ])
         
         equalButton.translatesAutoresizingMaskIntoConstraints = false
@@ -162,10 +168,10 @@ extension NumPadView {
         
         digitsStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            digitsStack.topAnchor.constraint(equalTo: upperLineStack.bottomAnchor, constant: 30),
+            digitsStack.topAnchor.constraint(equalTo: upperLineStack.bottomAnchor, constant: spacer),
             digitsStack.leadingAnchor.constraint(equalTo: leadingAnchor),
             digitsStack.trailingAnchor.constraint(equalTo: rightStack.leadingAnchor, constant: -15),
-            digitsStack.bottomAnchor.constraint(equalTo: zeroButton.topAnchor, constant: -30)
+            digitsStack.bottomAnchor.constraint(equalTo: zeroButton.topAnchor, constant: -spacer)
         ])
         
         dotButton.translatesAutoresizingMaskIntoConstraints = false
