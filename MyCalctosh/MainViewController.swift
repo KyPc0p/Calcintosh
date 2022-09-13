@@ -65,7 +65,7 @@ class MainViewController: UIViewController {
         label.font = UIFont(name: "sysfont", size: size)
         label.textColor = color
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.6
+        label.minimumScaleFactor = 0.8
         label.textAlignment = .right
         return label
     }
@@ -167,7 +167,7 @@ extension MainViewController {
     func setConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: titleRect.trailingAnchor, constant: 25),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -45),
             titleLabel.heightAnchor.constraint(equalToConstant: 70)
@@ -194,7 +194,7 @@ extension MainViewController {
             resultView.topAnchor.constraint(equalTo: patternView.topAnchor, constant: 25),
             resultView.leadingAnchor.constraint(equalTo: patternView.leadingAnchor, constant: 35),
             resultView.trailingAnchor.constraint(equalTo: patternView.trailingAnchor, constant: -40),
-            resultView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 5)
+            resultView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 4)
         ])
         
         resultLabel.translatesAutoresizingMaskIntoConstraints = false
