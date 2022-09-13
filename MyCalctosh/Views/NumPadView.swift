@@ -51,7 +51,7 @@ class NumPadView: UIView {
         zeroButton.setTitle("0", for: .normal)
         zeroButton.addTarget(self, action: #selector(numButtonPressed(_:)), for: .touchUpInside)
         zeroButton.contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left
-        zeroButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacer , bottom: 0, right: 0)
+        zeroButton.titleEdgeInsets = UIEdgeInsets(top: spacer/2, left: spacer , bottom: 0, right: 0)
         
         clearButton.setTitle("C", for: .normal)
         clearButton.addTarget(self, action: #selector(clearButtonPressed(_:)), for: .touchUpInside)
