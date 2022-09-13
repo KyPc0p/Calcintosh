@@ -1,6 +1,6 @@
 //
 //  Button.swift
-//  MyCalctosh
+//  Calcintosh
 //
 //  Created by Артём Харченко on 07.09.2022.
 //

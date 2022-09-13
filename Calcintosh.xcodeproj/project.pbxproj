@@ -22,7 +22,7 @@
 		7905E3CC28CF73BB00EE9001 /* ChiKareGo2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ChiKareGo2.ttf; sourceTree = "<group>"; };
 		7968538528C73CDD00F2CCF4 /* NumPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadView.swift; sourceTree = "<group>"; };
 		79B2684F28C88E87001AD145 /* NumPadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadButton.swift; sourceTree = "<group>"; };
-		79C617A128C5AD03005C669B /* MyCalctosh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyCalctosh.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79C617A128C5AD03005C669B /* Calcintosh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calcintosh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C617A428C5AD03005C669B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79C617A628C5AD03005C669B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		79C617A828C5AD03005C669B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		79C617A228C5AD03005C669B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				79C617A128C5AD03005C669B /* MyCalctosh.app */,
+				79C617A128C5AD03005C669B /* Calcintosh.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,9 +111,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		79C617A028C5AD03005C669B /* MyCalctosh */ = {
+		79C617A028C5AD03005C669B /* Calcintosh */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 79C617B528C5AD06005C669B /* Build configuration list for PBXNativeTarget "MyCalctosh" */;
+			buildConfigurationList = 79C617B528C5AD06005C669B /* Build configuration list for PBXNativeTarget "Calcintosh" */;
 			buildPhases = (
 				79C6179D28C5AD03005C669B /* Sources */,
 				79C6179E28C5AD03005C669B /* Frameworks */,
@@ -123,9 +123,9 @@
 			);
 			dependencies = (
 			);
-			name = MyCalctosh;
+			name = Calcintosh;
 			productName = MyCalctosh;
-			productReference = 79C617A128C5AD03005C669B /* MyCalctosh.app */;
+			productReference = 79C617A128C5AD03005C669B /* Calcintosh.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -156,7 +156,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				79C617A028C5AD03005C669B /* MyCalctosh */,
+				79C617A028C5AD03005C669B /* Calcintosh */,
 			);
 		};
 /* End PBXProject section */
@@ -390,7 +390,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		79C617B528C5AD06005C669B /* Build configuration list for PBXNativeTarget "MyCalctosh" */ = {
+		79C617B528C5AD06005C669B /* Build configuration list for PBXNativeTarget "Calcintosh" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				79C617B628C5AD06005C669B /* Debug */,

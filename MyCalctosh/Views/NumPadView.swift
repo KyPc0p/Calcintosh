@@ -1,6 +1,6 @@
 //
 //  NumPadView.swift
-//  MyCalctosh
+//  Calcintosh
 //
 //  Created by Артём Харченко on 06.09.2022.
 //
