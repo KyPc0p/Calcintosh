@@ -30,6 +30,7 @@
 		79C617B028C5AD06005C669B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79C617B228C5AD06005C669B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79C617BF28C5D56A005C669B /* sysfont.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sysfont.otf; sourceTree = "<group>"; };
+		79CF907828D0F4300059B04D /* Calcintosh.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Calcintosh.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +91,7 @@
 		79C617A328C5AD03005C669B /* Calcintosh */ = {
 			isa = PBXGroup;
 			children = (
+				79CF907828D0F4300059B04D /* Calcintosh.entitlements */,
 				79C617A828C5AD03005C669B /* MainViewController.swift */,
 				79C617AF28C5AD06005C669B /* LaunchScreen.storyboard */,
 				7905E3C528CF367F00EE9001 /* Views */,
@@ -321,9 +323,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Calcintosh/Calcintosh.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KKH4UHMTXR;
+				DEVELOPMENT_TEAM = 85D2483FS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Calcintosh/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Calcintosh;
@@ -339,8 +343,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = swiftbook.ru.MyCalctosh;
+				PRODUCT_BUNDLE_IDENTIFIER = ArtemKharchenko.Calcintosh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -352,9 +357,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Calcintosh/Calcintosh.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = KKH4UHMTXR;
+				DEVELOPMENT_TEAM = 85D2483FS7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Calcintosh/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Calcintosh;
@@ -370,8 +377,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = swiftbook.ru.MyCalctosh;
+				PRODUCT_BUNDLE_IDENTIFIER = ArtemKharchenko.Calcintosh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
