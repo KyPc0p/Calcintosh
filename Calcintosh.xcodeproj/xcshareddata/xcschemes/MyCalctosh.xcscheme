@@ -17,7 +17,7 @@
                BlueprintIdentifier = "79C617A028C5AD03005C669B"
                BuildableName = "MyCalctosh.app"
                BlueprintName = "MyCalctosh"
-               ReferencedContainer = "container:MyCalctosh.xcodeproj">
+               ReferencedContainer = "container:Calcintosh.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,7 +47,7 @@
             BlueprintIdentifier = "79C617A028C5AD03005C669B"
             BuildableName = "MyCalctosh.app"
             BlueprintName = "MyCalctosh"
-            ReferencedContainer = "container:MyCalctosh.xcodeproj">
+            ReferencedContainer = "container:Calcintosh.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -64,7 +64,7 @@
             BlueprintIdentifier = "79C617A028C5AD03005C669B"
             BuildableName = "MyCalctosh.app"
             BlueprintName = "MyCalctosh"
-            ReferencedContainer = "container:MyCalctosh.xcodeproj">
+            ReferencedContainer = "container:Calcintosh.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

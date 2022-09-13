@@ -143,7 +143,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 79C6179C28C5AD03005C669B /* Build configuration list for PBXProject "MyCalctosh" */;
+			buildConfigurationList = 79C6179C28C5AD03005C669B /* Build configuration list for PBXProject "Calcintosh" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -326,6 +326,7 @@
 				DEVELOPMENT_TEAM = KKH4UHMTXR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyCalctosh/App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Calcintosh;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
@@ -356,6 +357,7 @@
 				DEVELOPMENT_TEAM = KKH4UHMTXR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyCalctosh/App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Calcintosh;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
@@ -379,7 +381,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		79C6179C28C5AD03005C669B /* Build configuration list for PBXProject "MyCalctosh" */ = {
+		79C6179C28C5AD03005C669B /* Build configuration list for PBXProject "Calcintosh" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				79C617B328C5AD06005C669B /* Debug */,
