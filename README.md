@@ -1,4 +1,4 @@
-# MyCalctosh ✅
+# Calcintosh ✅
 ### Калькулятор Macintosh 1985 на современном Iphone 
 * Верстка исключительно кодом
 * MVC
