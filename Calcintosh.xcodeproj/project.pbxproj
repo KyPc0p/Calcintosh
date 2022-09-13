@@ -74,7 +74,7 @@
 		79C6179828C5AD03005C669B = {
 			isa = PBXGroup;
 			children = (
-				79C617A328C5AD03005C669B /* MyCalctosh */,
+				79C617A328C5AD03005C669B /* Calcintosh */,
 				79C617A228C5AD03005C669B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		79C617A328C5AD03005C669B /* MyCalctosh */ = {
+		79C617A328C5AD03005C669B /* Calcintosh */ = {
 			isa = PBXGroup;
 			children = (
 				79C617A828C5AD03005C669B /* MainViewController.swift */,
@@ -96,7 +96,7 @@
 				7905E3C428CF365300EE9001 /* Resources  */,
 				7905E3C328CF362000EE9001 /* App */,
 			);
-			path = MyCalctosh;
+			path = Calcintosh;
 			sourceTree = "<group>";
 		};
 		79C617C128C5D5A5005C669B /* Fonts */ = {
@@ -325,7 +325,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KKH4UHMTXR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyCalctosh/App/Info.plist;
+				INFOPLIST_FILE = Calcintosh/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Calcintosh;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -356,7 +356,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KKH4UHMTXR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MyCalctosh/App/Info.plist;
+				INFOPLIST_FILE = Calcintosh/App/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Calcintosh;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
