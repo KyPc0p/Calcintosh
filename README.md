@@ -4,7 +4,7 @@
 * MVC
 * Передача данных посредством протоколов
 * анимации нажатия
-* выполнение по тех заданию
+* выполнено по тех заданию
 ## Original Macintosh Calculator
 ![Calculator_mac](https://user-images.githubusercontent.com/79677367/189838251-fd4ea6ca-6d79-49e8-aead-5d71f1317f7f.png)
 
