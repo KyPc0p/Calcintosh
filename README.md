@@ -1,7 +1,9 @@
 # MyCalctosh
-### Калькулятор Macintosh 1985 на современном Iphone
-*Верстка исключительно кодом, MVC, передача данных посредством протоколов, анимации нажатия*
-
+### Калькулятор Macintosh 1985 на современном Iphone 
+* Верстка исключительно кодом
+* MVC
+* Передача данных посредством протоколов
+* анимации нажатия
 ## Original Macintosh Calculator
 ![Calculator_mac](https://user-images.githubusercontent.com/79677367/189838251-fd4ea6ca-6d79-49e8-aead-5d71f1317f7f.png)
 
