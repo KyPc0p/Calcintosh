@@ -11,7 +11,6 @@
 		7968538628C73CDD00F2CCF4 /* NumPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7968538528C73CDD00F2CCF4 /* NumPadView.swift */; };
 		79B2685028C88E87001AD145 /* NumPadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B2684F28C88E87001AD145 /* NumPadButton.swift */; };
 		79C617A528C5AD03005C669B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C617A428C5AD03005C669B /* AppDelegate.swift */; };
-		79C617A728C5AD03005C669B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C617A628C5AD03005C669B /* SceneDelegate.swift */; };
 		79C617A928C5AD03005C669B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C617A828C5AD03005C669B /* MainViewController.swift */; };
 		79C617AE28C5AD06005C669B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79C617AD28C5AD06005C669B /* Assets.xcassets */; };
 		79C617B128C5AD06005C669B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79C617AF28C5AD06005C669B /* LaunchScreen.storyboard */; };
@@ -24,7 +23,6 @@
 		79B2684F28C88E87001AD145 /* NumPadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadButton.swift; sourceTree = "<group>"; };
 		79C617A128C5AD03005C669B /* Calcintosh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calcintosh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79C617A428C5AD03005C669B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		79C617A628C5AD03005C669B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		79C617A828C5AD03005C669B /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		79C617AD28C5AD06005C669B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79C617B028C5AD06005C669B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -48,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				79C617A428C5AD03005C669B /* AppDelegate.swift */,
-				79C617A628C5AD03005C669B /* SceneDelegate.swift */,
 				79C617B228C5AD06005C669B /* Info.plist */,
 			);
 			path = App;
@@ -91,9 +88,9 @@
 		79C617A328C5AD03005C669B /* Calcintosh */ = {
 			isa = PBXGroup;
 			children = (
-				79CF907828D0F4300059B04D /* Calcintosh.entitlements */,
 				79C617A828C5AD03005C669B /* MainViewController.swift */,
 				79C617AF28C5AD06005C669B /* LaunchScreen.storyboard */,
+				79CF907828D0F4300059B04D /* Calcintosh.entitlements */,
 				7905E3C528CF367F00EE9001 /* Views */,
 				7905E3C428CF365300EE9001 /* Resources  */,
 				7905E3C328CF362000EE9001 /* App */,
@@ -186,7 +183,6 @@
 				7968538628C73CDD00F2CCF4 /* NumPadView.swift in Sources */,
 				79C617A928C5AD03005C669B /* MainViewController.swift in Sources */,
 				79C617A528C5AD03005C669B /* AppDelegate.swift in Sources */,
-				79C617A728C5AD03005C669B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,9 +330,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -368,9 +364,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = NO;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
