@@ -1,4 +1,5 @@
 # Calcintosh ✅
+AppStore: https://apps.apple.com/ru/app/calcintosh/id1644927575?l=en
 ### Калькулятор Macintosh 1985 на современном Iphone 
 * Верстка исключительно кодом
 * MVC
